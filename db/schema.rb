@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_28_061906) do
+ActiveRecord::Schema.define(version: 2020_10_28_064114) do
+
+  create_table "coupons", force: :cascade do |t|
+    t.string "name"
+    t.string "twid"
+    t.string "phone"
+    t.integer "board_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["board_id"], name: "index_coupons_on_board_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
@@ -22,4 +32,5 @@ ActiveRecord::Schema.define(version: 2020_10_28_061906) do
     t.index ["name"], name: "index_users_on_name", unique: true
   end
 
+  add_foreign_key "coupons", "boards"
 end
